@@ -2,10 +2,13 @@ package com.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ViewTreeObserver;
 
 import com.view.widget.ViewTest;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     private ViewTest view_test;
 
@@ -22,5 +25,46 @@ public class MainActivity extends AppCompatActivity {
 //                ObjectAnimator.ofFloat(view_test, "translationX", 0, 100).setDuration(500).start();
 //            }
 //        });
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            int width = view_test.getMeasuredWidth();
+            int height = view_test.getMeasuredHeight();
+            Log.d(TAG, "onWindowFocusChanged --- :" + width + ", " + height);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        view_test.post(new Runnable() {
+            @Override
+            public void run() {
+                int width = view_test.getMeasuredWidth();
+                int height = view_test.getMeasuredHeight();
+                Log.d(TAG, "view_test.post(new Runnable()) --- :" + width + ", " + height);
+            }
+        });
+
+        ViewTreeObserver observer = view_test.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onGlobalLayout() {
+                view_test.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                int width = view_test.getMeasuredWidth();
+                int height = view_test.getMeasuredHeight();
+                Log.d(TAG, "ViewTreeObserver --- :" + width + ", " + height);
+            }
+        });
+
+        int width = view_test.getMeasuredWidth();
+        int height = view_test.getMeasuredHeight();
+        Log.d(TAG, "onStart --- :" + width + ", " + height);
+
     }
 }

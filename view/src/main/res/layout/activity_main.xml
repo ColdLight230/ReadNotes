@@ -8,8 +8,8 @@
 
     <com.view.widget.ViewTest
         android:id="@+id/view_test"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimary"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray" />
 
 </android.support.constraint.ConstraintLayout>

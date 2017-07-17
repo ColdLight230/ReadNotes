@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Scroller;
 
 /**
  * 描    述：
@@ -13,22 +14,26 @@ import android.view.View;
  */
 
 public class ViewTest extends View {
+    private Context mContext;
 
     int lastX;
     int lastY;
 
     private final static String TAG = "ViewTest";
+    private Scroller scroller;
 
     public ViewTest(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ViewTest(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ViewTest(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
+        scroller = new Scroller(mContext);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class ViewTest extends View {
         int x = (int) event.getX();
         int y = (int) event.getY();
         int action = event.getAction();
-        switch (action){
+        switch (action) {
             case MotionEvent.ACTION_DOWN:
                 lastX = x;
                 lastY = y;
@@ -45,11 +50,16 @@ public class ViewTest extends View {
                 int offsetX = x - lastX;
                 int offsetY = y - lastY;
                 layout(getLeft() + offsetX, getTop() + offsetY,
-                        getRight() + offsetX , getBottom() + offsetY);
+                        getRight() + offsetX, getBottom() + offsetY);
                 break;
             case MotionEvent.ACTION_UP:
                 break;
         }
         return true;
+
+//        return super.onTouchEvent(event);
     }
+
+
+
 }
