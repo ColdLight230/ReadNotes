@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.view.MainActivity">
 
-    <com.view.widget.ViewTest
-        android:id="@+id/view_test"
+    <!--<com.view.widget.ViewTest-->
+    <!--android:id="@+id/view_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@android:color/darker_gray" />-->
+
+    <com.view.widget.CircleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray" />
+        android:layout_margin="20dp"
+        android:background="#000000"
+        android:padding="20dp"
+        app:ciclr_color="#55ae25ff" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="next" />
+</LinearLayout>
